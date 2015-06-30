@@ -32,9 +32,10 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		return userRole.getUserRoleId();
 	}
 
-	@Override
+	//@Override
 	@Transactional
 	public boolean authentification(User user) {
+		System.out.println("*********************************************");
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("username", user.getUsername())).add(Restrictions.eq("password", user.getPassword()));
 		User u;

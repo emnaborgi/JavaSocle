@@ -16,13 +16,12 @@ import com.sifast.users.model.User;
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public class UserDaoImpl implements UserDao, Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -39,13 +38,16 @@ public class UserDaoImpl implements UserDao, Serializable {
 		sessionFactory.getCurrentSession().flush();
 	}
 
-	@Override
+	//@Override
 	@Transactional
 	public boolean authentification(User user) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username", user.getUsername())).add(Restrictions.eq("password", user.getPassword()));
-//		User u = (User) criteria.list().get(0);
-		if(user.getUsername().equals("admin") && user.getPassword().equals("admin")){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("username", user.getUsername())).add(
+				Restrictions.eq("password", user.getPassword()));
+		// User u = (User) criteria.list().get(0);
+		if (user.getUsername().equals("admin")
+				&& user.getPassword().equals("admin")) {
 			return true;
 		}
 		return false;

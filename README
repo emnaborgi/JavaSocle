@@ -9,7 +9,10 @@ Maven 3
 *** Pour Démarrer avec le développement ***
 -------------------------------------------
 1-    Créer la base des données avec le nom << socle_jee >>
-2-	S’assurer que ‘hibernate.hbm2ddl.auto’, dans le fichier ‘src/main/ressources/spring/applicationContext.xml’, en mode ‘create’ pour la première exécution : <prop key="hibernate.hbm2ddl.auto">create</prop>
-3-	Après la création de la base des données mettre à jour ce dernier en mode update : <prop key="hibernate.hbm2ddl.auto">create</prop>
+2-	S’assurer que ‘hibernate.hbm2ddl.auto’, dans 
+le fichier ‘src/main/ressources/spring/applicationContext.xml’,
+ en mode ‘create’ pour la première exécution : <prop key="hibernate.hbm2ddl.auto">create</prop>
+3-	Après la création de la base des données mettre à jour ce dernier en mode update :
+ <prop key="hibernate.hbm2ddl.auto">create</prop>
 
 FINI

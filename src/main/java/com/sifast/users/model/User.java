@@ -79,7 +79,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (enabled ? 1231 : 1237);
+	//	result = prime * result + (enabled ? 1231 : 1237);
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
