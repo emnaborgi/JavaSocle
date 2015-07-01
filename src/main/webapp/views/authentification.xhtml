@@ -14,17 +14,17 @@
 		<p:growl id="growl" showDetail="true" sticky="true" /> 
 			<h:panelGrid columns="2" cellspacing="4" cellpadding="2" style="margin : auto">
 				<h:outputLabel value="Utilisateur"></h:outputLabel>
-				<p:inputText id="user" label="Utilisateur" required="true" value="#{userBean.user.username}" size="30"></p:inputText>
+				<p:inputText id="user" label="Utilisateur" required="true" value="#{loginBean.user.username}" size="30"></p:inputText>
 				
 			
 				
 				<h:outputLabel value="Mot de passe"></h:outputLabel>
-				<p:password id="password" label="Mot de passe" required="true" value="#{userBean.user.password}" size="30"></p:password>
+				<p:password id="password" label="Mot de passe" required="true" value="#{loginBean.user.password}" size="30"></p:password>
 				
 				
 				<h:outputLabel></h:outputLabel>
 				<p:commandButton ajax="false" value="Valider" type="submit" icon="ui-icon-extlink"
-				actionListener="#{userBean.authentification}"></p:commandButton>
+				actionListener="#{loginBean.authentification}"></p:commandButton>
 			</h:panelGrid>
 		</h:form>
 	</h:body>

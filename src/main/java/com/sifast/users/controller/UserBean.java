@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -18,13 +18,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.sifast.users.dao.UserRoleDao;
 import com.sifast.users.model.User;
 
-@ManagedBean(name = "userBean")
-@SessionScoped
+@ManagedBean(name = "loginBean")
+// @SessionScoped
+@RequestScoped
 public class UserBean {
 
 	@ManagedProperty(value = "#{userRoleDao}")
 	private UserRoleDao dao;
-	
+
 	private User user = new User();
 
 	@ManagedProperty(value = "#{authenticationManager}")
@@ -48,7 +49,7 @@ public class UserBean {
 
 	public String authentification(ActionEvent actionEvent) throws IOException {
 
-		System.out.println(dao==null);
+		System.out.println(dao == null);
 		System.out.println(new StringBuilder("user name : "
 				+ user.getUsername() + " password : " + user.getPassword()));
 		if (dao.authentification(user)) {
