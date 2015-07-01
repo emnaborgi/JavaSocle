@@ -6,42 +6,5 @@
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 	</el-resolver>
  </application>
-  <!-- <navigation-rule>
-        <display-name>views/authentification.xhtml</display-name>
-       	<from-view-id>views/authentification.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{navigator.navigateTo}</from-action>
-            <from-outcome>Secured</from-outcome>
-            <to-view-id>/views/secured.xhtml</to-view-id>
-            <redirect></redirect>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>views/authentification.xhtml</display-name>
-        <from-view-id>views/authentification.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{navigator.navigateTo}</from-action>
-            <from-outcome>UnSecured</from-outcome>
-            <to-view-id>/views/unsecured.xhtml</to-view-id>
-            <redirect></redirect>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <display-name>/views/secured.xhtml</display-name>
-        <from-view-id>/views/secured.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{userBean.logout}</from-action>
-            <from-outcome>loggedout</from-outcome>
-            <to-view-id>/views/authentification.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>	
-    <navigation-rule>
-        <display-name>views/authentification.xhtml</display-name>
-        <from-view-id>views/authentification.xhtml</from-view-id>
-        <navigation-case>
-            <from-action>#{userBean.authentification}</from-action>
-            <from-outcome>Secured</from-outcome>
-            <to-view-id>/views/secured.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule> -->
+  
 </faces-config>

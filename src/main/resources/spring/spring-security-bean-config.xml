@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="
@@ -7,9 +8,6 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<beans:bean id="navigator" name="navigator"
-		class="com.sifast.users.controller.Navigator" scope="session">
-	</beans:bean>
 
 	<beans:bean id="userBean" name="userBean"
 		class="com.sifast.users.controller.UserBean" scope="singleton">

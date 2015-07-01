@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -56,14 +57,18 @@ public class UserBean {
 			System.out.println("ok");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Bienvenue"));
-			// ExternalContext extContext =
-			// FacesContext.getCurrentInstance().getExternalContext();
-			// extContext.redirect(".xhtml");
+			ExternalContext extContext = FacesContext.getCurrentInstance()
+					.getExternalContext();
+			extContext.redirect("secure.xhtml");
 			System.out.println("success");
 		} else {
 			System.out.println("no");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Erreur!!"));
+			
+			ExternalContext extContext = FacesContext.getCurrentInstance()
+					.getExternalContext();
+			extContext.redirect("unsecure.xhtml");
 			System.out.println("");
 		}
 		// ////////////////////////////

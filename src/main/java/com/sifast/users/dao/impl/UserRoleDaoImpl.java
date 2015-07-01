@@ -41,11 +41,14 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		User u;
 		if(criteria.list()!=null && criteria.list().size() > 0)
 			u = (User) criteria.list().get(0);
-		if(user.getUsername().equals("admin") && user.getPassword().equals("admin")){
-			StringBuilder sb = new StringBuilder();
-			return true;
-		}
+//		if(user.getUsername().equals("admin") && user.getPassword().equals("admin")){
+//			StringBuilder sb = new StringBuilder();
+//			return true;
+//		}
+		if(criteria.list().size() == 0)
 		return false;
+		else
+			return true;
 	}
 
 }
