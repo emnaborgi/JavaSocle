@@ -4,4 +4,5 @@
 .springBeans
 .tern-project
 .classpath
+.metadata
 /target/

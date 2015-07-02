@@ -112,6 +112,8 @@ public class UserBean {
 			AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
+	
+	
 
 	private Object getPassword() {
 		// TODO Auto-generated method stub
