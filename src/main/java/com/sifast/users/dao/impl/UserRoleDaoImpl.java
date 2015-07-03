@@ -15,7 +15,7 @@ import com.sifast.users.model.UserRole;
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public class UserRoleDaoImpl implements UserRoleDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -32,20 +32,26 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		return userRole.getUserRoleId();
 	}
 
-	//@Override
+	// @Override
 	@Transactional
 	public boolean authentification(User user) {
 		System.out.println("*********************************************");
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username", user.getUsername())).add(Restrictions.eq("password", user.getPassword()));
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("username", user.getUsername())).add(
+				Restrictions.eq("password", user.getPassword()));
 		User u;
-		if(criteria.list()!=null && criteria.list().size() > 0)
+		if (criteria.list() != null && criteria.list().size() > 0)
 			u = (User) criteria.list().get(0);
-		if(user.getUsername().equals("admin") && user.getPassword().equals("admin")){
-			StringBuilder sb = new StringBuilder();
+		// if(user.getUsername().equals("admin") &&
+		// user.getPassword().equals("admin")){
+		// StringBuilder sb = new StringBuilder();
+		// return true;
+		// }
+		if (criteria.list().size() == 0)
+			return false;
+		else
 			return true;
-		}
-		return false;
 	}
 
 }

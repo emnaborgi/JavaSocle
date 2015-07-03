@@ -38,19 +38,26 @@ public class UserDaoImpl implements UserDao, Serializable {
 		sessionFactory.getCurrentSession().flush();
 	}
 
-	//@Override
+	// @Override
 	@Transactional
 	public boolean authentification(User user) {
+		System.out.println("*********************************************");
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				User.class);
 		criteria.add(Restrictions.eq("username", user.getUsername())).add(
 				Restrictions.eq("password", user.getPassword()));
-		// User u = (User) criteria.list().get(0);
-		if (user.getUsername().equals("admin")
-				&& user.getPassword().equals("admin")) {
+		User u;
+		if (criteria.list() != null && criteria.list().size() > 0)
+			u = (User) criteria.list().get(0);
+		// if(user.getUsername().equals("admin") &&
+		// user.getPassword().equals("admin")){
+		// StringBuilder sb = new StringBuilder();
+		// return true;
+		// }
+		if (criteria.list().size() == 0)
+			return false;
+		else
 			return true;
-		}
-		return false;
 	}
 
 }
