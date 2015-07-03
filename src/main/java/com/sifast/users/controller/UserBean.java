@@ -9,6 +9,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,61 +51,46 @@ public class UserBean {
 		this.user = user;
 	}
 
-	public String authentification(ActionEvent actionEvent) throws IOException {
-
-		System.out.println(dao == null);
-		System.out.println(new StringBuilder("user name : "
-				+ user.getUsername() + " password : " + user.getPassword()));
-		if (dao.authentification(user)) {
-			System.out.println("ok");
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Bienvenue"));
-			ExternalContext extContext = FacesContext.getCurrentInstance()
-					.getExternalContext();
-			extContext.redirect("secure.xhtml");
-			System.out.println("success");
-		} else {
-			System.out.println("no");
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Erreur!!"));
-			
-			ExternalContext extContext = FacesContext.getCurrentInstance()
-					.getExternalContext();
-			extContext.redirect("unsecure.xhtml");
-			System.out.println("");
-		}
-		// ////////////////////////////
-		try {
-			Authentication request = new UsernamePasswordAuthenticationToken(
-					this.getUser(), this.getPassword());
-
-			Authentication result = authenticationManager.authenticate(request);
-			SecurityContextHolder.getContext().setAuthentication(result);
-		} catch (AuthenticationException e) {
-			e.printStackTrace();
-		}
-		/**/// ///////////////////////originale///////////////////////
-		// System.out.println(new StringBuilder("user name : "
-		// + user.getUsername() + " password : " + user.getPassword()));
-		// if (dao.authentification(user)) {
-		// System.out.println("ok");
-		// FacesContext.getCurrentInstance().addMessage(null,
-		// new FacesMessage("Bienvenue"));
-		// // ExternalContext extContext =
-		// // FacesContext.getCurrentInstance().getExternalContext();
-		// // extContext.redirect(".xhtml");
-		// return "success";
-		// } else {
-		// System.out.println("no");
-		// FacesContext.getCurrentInstance().addMessage(null,
-		// new FacesMessage("Erreur!!"));
-		// return "";
-		// }
-
-		// //////////////////////////////*/
-		return "";
-
-	}
+	 public String authentification() {
+	        try {
+	            Authentication result = null;
+	            Authentication request = new UsernamePasswordAuthenticationToken(this.getUser(), this.getPassword());
+	            result = authenticationManager.authenticate(request);
+	            SecurityContextHolder.getContext().setAuthentication(result);
+	        } catch (AuthenticationException e) {
+	            e.printStackTrace();
+	        }
+	        return "Secured";
+	    }
+	 
+	    /**
+	     * Cancel.
+	     * 
+	     * @return the string
+	     */
+	    public String cancel() {
+	        return null;
+	    }
+	 
+	    /**
+	     * Logout.
+	     * 
+	     * @return the string
+	     */
+	    public String logout() {
+	        SecurityContextHolder.clearContext();
+	        /**
+	         * Delete Cookies
+	         */
+	        HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+	                .getResponse();
+	        Cookie cookie = new Cookie("SPRING_SECURITY_REMEMBER_ME_COOKIE", null);
+	        cookie.setMaxAge(0);
+	        cookie.setPath(httpServletRequest.getContextPath().length() > 0 ? httpServletRequest.getContextPath() : "/");
+	        httpServletResponse.addCookie(cookie);
+	        return "loggedout";
+	    }
 
 	public AuthenticationManager getAuthenticationManager() {
 		return authenticationManager;

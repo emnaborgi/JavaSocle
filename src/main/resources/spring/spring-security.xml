@@ -47,12 +47,12 @@
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
  
-		   users-by-username-query="
+		  users-by-username-query="
 		      select `username` as username, `password`, `enabled` 
 		      from `users` where password=?" 
  
 		   authorities-by-username-query="
-		      select `username` as username, `role` as authority from `users` where password =?" 
+		      select `username` as username, `role` as authority from `user_roles` where username =?" 
 		/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
