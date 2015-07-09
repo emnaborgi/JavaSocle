@@ -4,34 +4,29 @@
       xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-      
+
    <h:head>
 	
 	</h:head>
 	
 	<h:body>
-	<!-- c:url value='/j_spring_security_check'/ -->
-		<h:form style="text-align: right" method="post" action="">
+		<form style="text-align: right" method="post" action="/j_spring_security_check‏">
 		<p:growl id="growl" showDetail="true" sticky="true" /> 
-			
-			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-			
 			<h:panelGrid columns="2" cellspacing="4" cellpadding="2" style="margin : auto">
-				
 				<h:outputLabel value="Utilisateur"></h:outputLabel>
-				<p:inputText id="j_username" label="Utilisateur" required="true" size="30"></p:inputText>
+				<p:inputText id="user" label="Utilisateur" required="true" value="" size="30"></p:inputText>
 				
 			
 				
 				<h:outputLabel value="Mot de passe"></h:outputLabel>
-				<p:password id="j_password" label="Mot de passe" required="true" size="30"></p:password>
+				<p:password id="password" label="Mot de passe" required="true" value="" size="30"></p:password>
 				
 				
 				<h:outputLabel></h:outputLabel>
 				<!-- <p:commandButton ajax="false" value="Valider" type="submit" icon="ui-icon-extlink"></p:commandButton> -->
 				<input type="submit" value="Valider"></input>
 			</h:panelGrid>
-		</h:form>
+		</form>
 	</h:body>
    
 </html>

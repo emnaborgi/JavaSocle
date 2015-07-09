@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -20,7 +21,7 @@ import com.sifast.users.dao.UserRoleDao;
 import com.sifast.users.model.User;
 
 @ManagedBean(name = "loginBean")
-// @SessionScoped
+ @SessionScoped
 @RequestScoped
 public class UserBean {
 
@@ -52,7 +53,7 @@ public class UserBean {
 
 		System.out.println(dao == null);
 		System.out.println(new StringBuilder("user name : "
-				+ user.getUsername() + " password : " + user.getPassword()));
+				+ user.getUsername() + "   password : " + user.getPassword()));
 		if (dao.authentification(user)) {
 			System.out.println("ok");
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -73,14 +74,16 @@ public class UserBean {
 		}
 		// ////////////////////////////
 		try {
-			Authentication request = new UsernamePasswordAuthenticationToken(
-					this.getUser(), this.getPassword());
-
-			Authentication result = authenticationManager.authenticate(request);
-			SecurityContextHolder.getContext().setAuthentication(result);
-		} catch (AuthenticationException e) {
-			e.printStackTrace();
-		}
+	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(this.getUser(), this.getPassword()));
+	        if (authenticate.isAuthenticated()) {
+	            SecurityContextHolder.getContext().setAuthentication(authenticate);             
+	            return "true";
+	        }
+	    }
+	    catch (AuthenticationException e) {         
+	    }
+	    return "false";
+	
 		/**/// ///////////////////////originale///////////////////////
 		// System.out.println(new StringBuilder("user name : "
 		// + user.getUsername() + " password : " + user.getPassword()));
@@ -99,8 +102,6 @@ public class UserBean {
 		// return "";
 		// }
 
-		// //////////////////////////////*/
-		return "";
 
 	}
 
