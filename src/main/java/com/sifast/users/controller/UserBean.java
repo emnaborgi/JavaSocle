@@ -21,7 +21,7 @@ import com.sifast.users.dao.UserRoleDao;
 import com.sifast.users.model.User;
 
 @ManagedBean(name = "loginBean")
- @SessionScoped
+@SessionScoped
 @RequestScoped
 public class UserBean {
 
@@ -66,7 +66,7 @@ public class UserBean {
 			System.out.println("no");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Erreur!!"));
-			
+
 			ExternalContext extContext = FacesContext.getCurrentInstance()
 					.getExternalContext();
 			extContext.redirect("unsecure.xhtml");
@@ -74,16 +74,18 @@ public class UserBean {
 		}
 		// ////////////////////////////
 		try {
-	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(this.getUser(), this.getPassword()));
-	        if (authenticate.isAuthenticated()) {
-	            SecurityContextHolder.getContext().setAuthentication(authenticate);             
-	            return "true";
-	        }
-	    }
-	    catch (AuthenticationException e) {         
-	    }
-	    return "false";
-	
+			Authentication authenticate = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(this
+							.getUser(), this.getPassword()));
+			if (authenticate.isAuthenticated()) {
+				SecurityContextHolder.getContext().setAuthentication(
+						authenticate);
+				return "true";
+			}
+		} catch (AuthenticationException e) {
+		}
+		return "false";
+
 		/**/// ///////////////////////originale///////////////////////
 		// System.out.println(new StringBuilder("user name : "
 		// + user.getUsername() + " password : " + user.getPassword()));
@@ -102,7 +104,6 @@ public class UserBean {
 		// return "";
 		// }
 
-
 	}
 
 	public AuthenticationManager getAuthenticationManager() {
@@ -113,8 +114,6 @@ public class UserBean {
 			AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
-	
-	
 
 	private Object getPassword() {
 		// TODO Auto-generated method stub

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	 xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-   
-   
-   
-	<beans:bean id="authenticationFilter" class=
-"org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-<beans:property name="authenticationManager" ref="authenticationManager"/>
-<beans:property name="filterProcessesUrl" value="/j_spring_security_check"/>
-</beans:bean>
-   
+
+
+
+	<beans:bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
+	</beans:bean>
+
 
 </beans:beans>

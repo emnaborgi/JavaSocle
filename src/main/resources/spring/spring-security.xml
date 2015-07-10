@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:sec="http://www.springframework.org/schema/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
@@ -13,51 +12,41 @@
 		ref="mosaicAuthenticationProvider" /> <sec:authentication-provider ref="preauthAuthProvider" 
 		/> <sec:authentication-provider ref="daoAuthProvider" /> </sec:authentication-manager> -->
 
-	<!--   <sec:http auto-config="true" use-expressions="true">
-		<sec:intercept-url pattern="/views/secure.xhtml"
-			access="hasRole('ROLE_USER')" />
-		<sec:intercept-url pattern="/views/unsecure.xhtml"
-			access="permitAll" />
-		<sec:intercept-url pattern="/**" access="permitAll" />
-		<sec:form-login login-page="/views/authentification.xhtml" />
-	</sec:http>
+	<!-- <sec:http auto-config="true" use-expressions="true"> <sec:intercept-url 
+		pattern="/views/secure.xhtml" access="hasRole('ROLE_USER')" /> <sec:intercept-url 
+		pattern="/views/unsecure.xhtml" access="permitAll" /> <sec:intercept-url 
+		pattern="/**" access="permitAll" /> <sec:form-login login-page="/views/authentification.xhtml" 
+		/> </sec:http> <sec:authentication-manager alias="authenticationManager"> 
+		<sec:authentication-provider> <sec:user-service> <sec:user authorities="ROLE_USER" 
+		name="user" password="user" /> </sec:user-service> </sec:authentication-provider> 
+		</sec:authentication-manager> -->
 
-	 <sec:authentication-manager alias="authenticationManager">
-		<sec:authentication-provider>
-			<sec:user-service>
-				<sec:user authorities="ROLE_USER" name="user" password="user" />
-			</sec:user-service>
-		</sec:authentication-provider>
-	</sec:authentication-manager>  -->
-	
-	 <sec:http auto-config="true" use-expressions="true">
+	<sec:http auto-config="true" use-expressions="true">
 		<sec:intercept-url pattern="/views/secure.xhtml"
 			access="ROLE_ADMIN" />
 		<sec:intercept-url pattern="/views/unsecure.xhtml"
 			access="ROLE_USER" />
-		<sec:intercept-url pattern="/**"  />
+		<sec:intercept-url pattern="/**" />
 		<sec:intercept-url pattern="/views/authentification.xhtml*" />
-		<sec:form-login login-page="/views/authentification.xhtml" 
-		      authentication-failure-url="/views/secure.xhtml"
-              login-processing-url="/j_spring_security_check"/>
-		<sec:logout
-            invalidate-session="true"
-            delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
-            logout-success-url="/views/authentification.xhtml"></sec:logout>
+		<sec:form-login login-page="/views/authentification.xhtml"
+		username-parameter="j_username"
+			password-parameter="j_password" default-target-url="/secure"
+			authentication-failure-url="/unsecure"
+			 />
+		<sec:logout invalidate-session="true"
+			delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
+			logout-success-url="/views/authentification.xhtml"></sec:logout>
 	</sec:http>
-	
-	
-	<sec:authentication-manager  alias="authenticationManager" erase-credentials="false" >
+
+
+	<sec:authentication-manager alias="authenticationManager"
+		>
 		<sec:authentication-provider>
-			<sec:jdbc-user-service data-source-ref="dataSource"  
-    users-by-username-query="select `username`,`password`, enabled from `users` where username=?"  
-    authorities-by-username-query="select `username`, `role` from `user_roles` where username =?  " /> 
+			<sec:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select `username`,`password`, enabled from `users` where username=?"
+				authorities-by-username-query="select `username`, `role` from `user_roles` where username =?  " />
 		</sec:authentication-provider>
 	</sec:authentication-manager>
-	
-	
-	
-	
 
 
 </beans:beans>
