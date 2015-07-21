@@ -7,7 +7,6 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/spring/applicationContext.xml,
-			classpath:/hibernate/hibernate.cfg.xml,
 			classpath:/spring/spring-security-bean-config.xml,
 			classpath:/spring/spring-security.xml</param-value>
 	</context-param>

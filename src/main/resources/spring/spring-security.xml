@@ -8,18 +8,6 @@
        http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 
-
-
-	<!-- <sec:http auto-config="true" use-expressions="true"> <sec:intercept-url 
-		pattern="/views/secure.xhtml" access="hasRole('ROLE_USER')" /> <sec:intercept-url 
-		pattern="/views/unsecure.xhtml" access="permitAll" /> <sec:intercept-url 
-		pattern="/**" access="permitAll" /> <sec:form-login login-page="/views/authentification.xhtml" 
-		/> </sec:http> <sec:authentication-manager alias="authenticationManager"> 
-		<sec:authentication-provider> <sec:user-service> <sec:user authorities="ROLE_USER" 
-		name="user" password="user" /> </sec:user-service> </sec:authentication-provider> 
-		</sec:authentication-manager> -->
-
-
 	<sec:http auto-config="true" use-expressions="true">
 		<sec:intercept-url pattern="/views/secure.xhtml"
 			access="ROLE_ADMIN" />
@@ -27,26 +15,21 @@
 			access="ROLE_USER" />
 		<sec:intercept-url pattern="/**" />
 		<sec:intercept-url pattern="/views/authentification.xhtml*" />
+
 		<sec:form-login login-page="/views/authentification.xhtml"
-		username-parameter="j_username"
-			password-parameter="j_password" default-target-url="/secure"
-			authentication-failure-url="/unsecure"
-			 />
+			username-parameter="j_username" password-parameter="j_password"
+			default-target-url="/secure" authentication-failure-url="/unsecure" />
 		<sec:logout invalidate-session="true"
 			delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
 			logout-success-url="/views/authentification.xhtml"></sec:logout>
 	</sec:http>
-
-
-	<sec:authentication-manager alias="authenticationManager"
-		>
+	<sec:authentication-manager alias="authenticationManager">
 		<sec:authentication-provider>
 			<sec:jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select `username`,`password`, enabled from `users` where username=?"
-				authorities-by-username-query="select `username`, `role` from `user_roles` where username =?  " />
+				users-by-username-query="select `username`,`password`, enabled from `users` where md5(username)=?"
+				authorities-by-username-query="select `username`, `role` from `user_roles` where md5(username) =?  " />
 
 		</sec:authentication-provider>
 	</sec:authentication-manager>
-
 
 </beans:beans>

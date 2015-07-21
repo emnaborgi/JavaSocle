@@ -72,6 +72,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
+		<!-- TODO: a supprimer -->
 		<dependency>
 			<groupId>org.springframework.security.kerberos</groupId>
 			<artifactId>spring-security-kerberos-web</artifactId>
